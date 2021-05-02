@@ -11,7 +11,7 @@ public class FileFormatException extends Exception{
         this.exceptionString = exceptionString;
 
     }
-    //todo more
+
     @Override
     public String toString(){
         return "Found an error at line "+ lineNumber.toString()+": \""+ lineContent + "\"\n" + exceptionString;

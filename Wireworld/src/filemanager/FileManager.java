@@ -3,9 +3,7 @@ package filemanager;
 import board.Board;
 import filemanager.component.Component;
 import filemanager.component.ComponentFactory;
-import filemanager.exceptions.NumberOfParamsException;
-import filemanager.exceptions.FileFormatException;
-import filemanager.exceptions.ParametersFormatException;
+import filemanager.exceptions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +18,7 @@ public class FileManager {
         board = new Board(x_size, y_size);
     }
 
-    public void loadBoard(File file) throws FileNotFoundException, FileFormatException {
+    public void loadBoard(File file) throws FileNotFoundException, FileFormatException, ComponentPlacementException {
         Scanner scanner = new Scanner(file);
         int linesCounter = 0;
 
@@ -35,11 +33,10 @@ public class FileManager {
                 try{
                     Component component = ComponentFactory.getComponent(lineSplitted);
                     board.addComponent(component);
-                } catch (NumberOfParamsException | ParametersFormatException e){
+                } catch (NumberOfParamsException | ParametersFormatException | ComponentRotationException e){
                     throw new FileFormatException(linesCounter, line, e.toString());
                 }
-                
-                System.out.println("DOBRZE");
+
             }else {
                 throw new FileFormatException(linesCounter, line, "Wrong component name.");
             }

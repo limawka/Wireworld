@@ -7,5 +7,10 @@ public interface Component {
     Cell[][] getComponentArray();
     int getX();
     int getY();
-    //todo reszta getterow
+    int getStartX();
+    int getStartY();
+    int getXSize();
+    int getYSize();
+
+    String getName();
 }
