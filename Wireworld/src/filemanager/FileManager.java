@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileManager {
-    Board board;
+    public Board board; // tymczasowo, todo inny sposób dostępu do metod board'u
 
     public FileManager(int x_size, int y_size){
         board = new Board(x_size, y_size);
@@ -29,7 +29,6 @@ public class FileManager {
             ArrayList<String> lineSplitted = new ArrayList<>(Arrays.asList(line.split(" ")));
 
             if( Arrays.asList(Component.componentList).contains(lineSplitted.get(0)) ){
-
                 try{
                     Component component = ComponentFactory.getComponent(lineSplitted);
                     board.addComponent(component);
