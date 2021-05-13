@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="pakiet.WireworldWindow">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <toolbar id="12193">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-8553091"/>
+          <foreground color="-12042565"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="69f2f" class="javax.swing.JButton" binding="readFileButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-12828863"/>
+              <foreground color="-4473925"/>
+              <text value="Read File"/>
+            </properties>
+          </component>
+          <component id="4c088" class="javax.swing.JButton" binding="saveToFileButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Save to File"/>
+            </properties>
+          </component>
+          <component id="e8954" class="javax.swing.JButton" binding="runStopButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Run/Stop"/>
+            </properties>
+          </component>
+          <component id="434ef" class="javax.swing.JFormattedTextField" binding="formattedTextField1" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </toolbar>
+      <grid id="dff92" binding="Canvas" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+    </children>
+  </grid>
+</form>
