@@ -31,17 +31,29 @@ public class ComponentFactory {
                         throw new NumberOfParamsException();
                 case "ORGate":
                     if(params.size() > 2 && params.size() < 5)
-                        return null;
+                        return new ORGate(
+                                Integer.parseInt(params.get(1)),
+                                Integer.parseInt(params.get(2)),
+                                params.size() > 3 ? Integer.parseInt(params.get(3)) : 0
+                        );
                     else
                         throw new NumberOfParamsException();
                 case "XORGate":
                     if(params.size() > 2 && params.size() < 5)
-                        return null;
+                        return new XORGate(
+                                Integer.parseInt(params.get(1)),
+                                Integer.parseInt(params.get(2)),
+                                params.size() > 3 ? Integer.parseInt(params.get(3)) : 0
+                        );
                     else
                         throw new NumberOfParamsException();
                 case "Clock":
                     if(params.size() > 2 && params.size() < 5)
-                        return null;
+                        return new Clock(
+                                Integer.parseInt(params.get(1)),
+                                Integer.parseInt(params.get(2)),
+                                params.size() > 3 ? Integer.parseInt(params.get(3)) : 0
+                        );
                     else
                         throw new NumberOfParamsException();
                 case "ElectronTail":
@@ -50,14 +62,26 @@ public class ComponentFactory {
                                 Integer.parseInt(params.get(1)),
                                 Integer.parseInt(params.get(2))
                         );
+                    else
+                        throw new NumberOfParamsException();
                 case "ElectronHead":
                     if(params.size() == 3)
                         return new ElectronHead(
                                 Integer.parseInt(params.get(1)),
                                 Integer.parseInt(params.get(2))
                         );
+                    else
+                        throw new NumberOfParamsException();
                 case "Wire":
-                    return null;
+                    if(params.size() == 5)
+                        return new Wire(
+                                Integer.parseInt(params.get(1)),
+                                Integer.parseInt(params.get(2)),
+                                Integer.parseInt(params.get(3)),
+                                Integer.parseInt(params.get(4))
+                        );
+                    else
+                        throw new NumberOfParamsException();
                 default:
                     return null;
             }

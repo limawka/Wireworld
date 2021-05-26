@@ -42,4 +42,7 @@ public class FileManager {
         }
     }
 
+    public Board getBoard() {
+        return board;
+    }
 }
