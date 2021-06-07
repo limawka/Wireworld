@@ -41,22 +41,17 @@ public class UserInterface {
         background.getRootPanel().repaint();
         Thread.sleep(500);
     }
-    public static void showBoard (){
-        try {
+    public static void showBoard () throws FileNotFoundException, FileFormatException, ComponentPlacementException {
+
             //todo czyscic plansze przed wczytaniem kolejnego pliku
             //fm.loadBoard(new File("example_boards/test"));
             fm.loadBoard(background.getFileIn());   // pliki z innego folderu niz folder z aplikacja sie u mnie nie wczytuja, todo przetestowac i ewentualnie naprawic
             board = fm.getBoard();
 
-            boardRenderer = new BoardRenderer(150, 100, board);
+            boardRenderer = new BoardRenderer(fm.getxSize(), fm.getySize(), board);
             background.getRootPanel().add(boardRenderer);
             frame.setVisible(true);
             boardRenderer.setVisible(true);
 
-        }
-        catch (FileNotFoundException | FileFormatException | ComponentPlacementException | NullPointerException e)
-        {
-            System.out.println(e.toString());
-        }
     }
 }

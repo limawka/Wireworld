@@ -31,6 +31,8 @@ public class Wire implements Component{
         }
         BresenhamLineDrawingAlgorithm(xSize-1, ySize-1);
     }
+    // Bresenham Alghoritm
+    // https://iq.opengenus.org/bresenham-line-drawining-algorithm/
     void BresenhamLineDrawingAlgorithm(int X2, int Y2)
     {
         int x = 0;

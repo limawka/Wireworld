@@ -41,7 +41,7 @@ public class Board {
 
     }
 
-    public Cell[][] updateBoard() {
+    public void updateBoard() {
         List<Component> electronsTemp = new ArrayList<>();
 
         for (Component electron : electrons) {
@@ -67,7 +67,6 @@ public class Board {
         for (Component electron : electrons) {
             board[electron.getX()][electron.getY()] = electron.getComponentArray()[0][0];
         }
-        return board;
     }
 
     private boolean conductorTransformIntoElectron(int x, int y) {

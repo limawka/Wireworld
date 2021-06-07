@@ -12,10 +12,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileManager {
-    public Board board; // tymczasowo, todo inny sposób dostępu do metod board'u
+    private final Board board;
+    private final int xSize;
+    private final int ySize;
 
-    public FileManager(int x_size, int y_size){
-        board = new Board(x_size, y_size);
+    public FileManager(int xSize, int ySize){
+        this.xSize = xSize;
+        this.ySize = ySize;
+        board = new Board(xSize, ySize);
     }
 
     public void loadBoard(File file) throws FileNotFoundException, FileFormatException, ComponentPlacementException {
@@ -44,5 +48,13 @@ public class FileManager {
 
     public Board getBoard() {
         return board;
+    }
+
+    public int getxSize() {
+        return xSize;
+    }
+
+    public int getySize() {
+        return ySize;
     }
 }

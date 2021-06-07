@@ -1,6 +1,9 @@
 package gui;
 
 
+import filemanager.exceptions.ComponentPlacementException;
+import filemanager.exceptions.FileFormatException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -8,6 +11,8 @@ import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import static gui.UserInterface.showBoard;
 import static gui.UserInterface.update;
@@ -31,100 +36,91 @@ public class WireworldWindow {
 
     public WireworldWindow() {
 
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        nextButton.addActionListener(e -> {
+            try {
+                update();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        });
+        readFileButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            int decision = chooser.showOpenDialog(WireworldWindow.this.MainPanel);
+            if (decision == JFileChooser.APPROVE_OPTION) {
+                fileIn = chooser.getSelectedFile();
+                String filename = fileIn.getAbsolutePath();
+                pathReadFile.setText(filename);
                 try {
-                    update();
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-            }
-        });
-        readFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                int decision = chooser.showOpenDialog(WireworldWindow.this.MainPanel);
-                if (decision == JFileChooser.APPROVE_OPTION) {
-                    fileIn = chooser.getSelectedFile();
-                    String filename = fileIn.getAbsolutePath();
-                    pathReadFile.setText(filename);
                     showBoard();
+                } catch (FileNotFoundException | FileFormatException | ComponentPlacementException exception) {
+                    showMessageDialog(null, exception.toString());
                 }
             }
         });
-        saveToFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                int decision = chooser.showOpenDialog(WireworldWindow.this.MainPanel);
-                if (decision == JFileChooser.APPROVE_OPTION) {
-                    File selected = chooser.getSelectedFile();
-                    String filename = selected.getAbsolutePath();
-                    pathSaveToFile.setText(filename);
-                    try {
-                        PrintWriter out = new PrintWriter(filename);
-                        board.Board b = BoardRenderer.getB();
-                        for(int i = 0; i < BoardRenderer.getX_size(); i++){
-                            for(int j = 0; j < BoardRenderer.getY_size(); j++){
-                                if(b.board[i][j] == board.Cell.CONDUCTOR){
-                                    out.println("Wire " + i +" " + j + " " + (i+1) + " " + j);
-                                }
-                                else
-                                if(b.board[i][j] == board.Cell.EHEAD){
-                                    out.println("ElectronHead " + i +" " + j);
-                                }
-                                else
-                                if(b.board[i][j] == board.Cell.ETAIL){
-                                    out.println("ElectronTail " + i +" " + j);
-                                }
+        saveToFileButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            int decision = chooser.showOpenDialog(WireworldWindow.this.MainPanel);
+            if (decision == JFileChooser.APPROVE_OPTION) {
+                File selected = chooser.getSelectedFile();
+                String filename = selected.getAbsolutePath();
+                pathSaveToFile.setText(filename);
+                try {
+                    PrintWriter out = new PrintWriter(filename);
+                    board.Board b = BoardRenderer.getB();
+                    for(int i = 0; i < BoardRenderer.getX_size(); i++){
+                        for(int j = 0; j < BoardRenderer.getY_size(); j++){
+                            if(b.board[i][j] == board.Cell.CONDUCTOR){
+                                out.println("Wire " + i +" " + j + " " + (i+1) + " " + j);
+                            }
+                            else
+                            if(b.board[i][j] == board.Cell.EHEAD){
+                                out.println("ElectronHead " + i +" " + j);
+                            }
+                            else
+                            if(b.board[i][j] == board.Cell.ETAIL){
+                                out.println("ElectronTail " + i +" " + j);
                             }
                         }
-                        out.close();
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
                     }
+                    out.close();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
                 }
             }
         });
-        runStopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        runStopButton.addActionListener(e -> {
 
-                if (running) {
-                    running = false;
-                    boardUpdater.stop();
-                } else {
-                    running = true;
-                    int delay = 500;
-                    int iterationsNumber = 0;
-                    try {
-                        iterationsNumber = (int) numberOfIterationsChooser.getValue();
-                    } catch (ClassCastException ignored) {
-                    } finally {
-                        int finalIterationsNumber = iterationsNumber;
-                        boardUpdater = new Timer(delay, new ActionListener() {
-                            private int counter;
+            if (running) {
+                running = false;
+                boardUpdater.stop();
+            } else {
+                running = true;
+                int delay = 500;
+                int iterationsNumber = 0;
+                try {
+                    iterationsNumber = (int) numberOfIterationsChooser.getValue();
+                } catch (ClassCastException ignored) {
+                } finally {
+                    int finalIterationsNumber = iterationsNumber;
+                    boardUpdater = new Timer(delay, new ActionListener() {
+                        private int counter;
 
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                try {
-                                    update();
-                                } catch (InterruptedException interruptedException) {
-                                    interruptedException.printStackTrace();
-                                }
-                                counter++;
-                                if (counter == finalIterationsNumber) {
-                                    ((Timer) e.getSource()).stop();
-                                }
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                update();
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
                             }
-                        });
-                        boardUpdater.start();
-                    }
+                            counter++;
+                            if (counter == finalIterationsNumber) {
+                                ((Timer) e.getSource()).stop();
+                            }
+                        }
+                    });
+                    boardUpdater.start();
                 }
             }
-
         });
     }
 
