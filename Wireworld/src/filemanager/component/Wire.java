@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import static board.Cell.CONDUCTOR;
 import static board.Cell.EMPTY;
+import static java.lang.Math.abs;
 
 public class Wire implements Component{
 
@@ -21,24 +22,72 @@ public class Wire implements Component{
         this.yStart = yStart;
 
         this.xSize = xEnd - xStart + 1;
-        this.ySize = yEnd - xStart + 1;
+        this.ySize = yEnd - yStart + 1;
 
         componentArray = new Cell[xSize][ySize];
         for (Cell[] column:
                 componentArray) {
             Arrays.fill(column, EMPTY);
         }
-        drawWire(xSize-1, ySize-1);
+        BresenhamLineDrawingAlgorithm(xSize-1, ySize-1);
+    }
+    void BresenhamLineDrawingAlgorithm(int X2, int Y2)
+    {
+        int x = 0;
+        int y = 0;
+
+        //this is the case when slope(m) < 1
+        if(abs(X2) > abs(Y2))
+        {
+            componentArray[x][y] = CONDUCTOR;    //this putpixel is for very first pixel of the line
+            int pk = (2 * abs(Y2)) - abs(X2);
+
+            for(int i = 0; i < abs(X2) ; i++)
+            {
+                x = x + 1;
+                if(pk < 0)
+                    pk = pk + (2 * abs(Y2));
+                else
+                {
+                    y = y + 1;
+                    pk = pk + (2 * abs(Y2)) - (2 * abs(X2));
+                }
+                componentArray[x][y] = CONDUCTOR;
+            }
+        }
+        else
+        {
+            //this is the case when slope is greater than or equal to 1  i.e: m>=1
+            componentArray[x][y] = CONDUCTOR;    //this putpixel is for very first pixel of the line
+            int pk = (2 * abs(X2)) - abs(Y2);
+
+            for(int i = 0; i < abs(Y2) ; i++)
+            {
+                y = y + 1;
+                if(pk < 0)
+                    pk = pk + (2 * abs(X2));
+                else
+                {
+                    x = x + 1;
+                    pk = pk + (2 * abs(X2)) - (2 *abs(Y2));
+                }
+
+                componentArray[x][y] = CONDUCTOR;    // display pixel at coordinate (x, y)
+
+            }
+
+        }
     }
 
     private void drawWire(int width, int height) {
         int error = 0;
         int y = 0;
-        for(int x = 0; x< width; x++) {
+        for(int x = 0; x<= width; x++) {
             componentArray[x][y] = CONDUCTOR;
             error = error + height;
-            if( 2*error >= width) {
+            while( error >= 2*(width+1)) {
                 y = y + 1;
+                componentArray[x][y] = CONDUCTOR;
                 error=error - width;
             }
         }
