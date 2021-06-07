@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardRenderer extends JPanel {
-    private int x_size;
-    private int y_size;
-    private Board b;
+    private static int x_size;
+    private static int y_size;
+    private static Board b;
 
     public BoardRenderer(int x_size, int y_size, Board board) {
         this.x_size = x_size;
@@ -19,6 +19,17 @@ public class BoardRenderer extends JPanel {
         repaint();
         b.updateBoard();
     }
+
+    public static Board getB() {
+        return b;
+    }
+    public static int getX_size(){
+        return x_size;
+    }
+    public static int getY_size(){
+        return y_size;
+    }
+
     public void paintComponent(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -34,7 +45,7 @@ public class BoardRenderer extends JPanel {
                 }
                 else
                 if(b.board[i][j] == Cell.CONDUCTOR){
-                    g2d.setColor(Color.GREEN);
+                    g2d.setColor(Color.YELLOW);
                     g2d.fillRect(i*10, j*10, 10, 10);
                     g2d.setColor(Color.DARK_GRAY);
                     g2d.drawRect(i*10, j*10, 10, 10);
