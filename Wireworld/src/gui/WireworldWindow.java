@@ -2,6 +2,9 @@ package gui;
 
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -27,6 +30,7 @@ public class WireworldWindow {
     private Timer boardUpdater = null;
 
     public WireworldWindow() {
+
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,6 +63,28 @@ public class WireworldWindow {
                     File selected = chooser.getSelectedFile();
                     String filename = selected.getAbsolutePath();
                     pathSaveToFile.setText(filename);
+                    try {
+                        PrintWriter out = new PrintWriter(filename);
+                        board.Board b = BoardRenderer.getB();
+                        for(int i = 0; i < BoardRenderer.getX_size(); i++){
+                            for(int j = 0; j < BoardRenderer.getY_size(); j++){
+                                if(b.board[i][j] == board.Cell.CONDUCTOR){
+                                    out.println("Wire " + i +" " + j + " " + (i+1) + " " + j);
+                                }
+                                else
+                                if(b.board[i][j] == board.Cell.EHEAD){
+                                    out.println("ElectronHead " + i +" " + j);
+                                }
+                                else
+                                if(b.board[i][j] == board.Cell.ETAIL){
+                                    out.println("ElectronTail " + i +" " + j);
+                                }
+                            }
+                        }
+                        out.close();
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
                 }
             }
         });
