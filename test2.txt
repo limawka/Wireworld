@@ -1,0 +1,44 @@
+Clock 10 10 0
+ANDGate 20 20 0
+Wire 19 10 19 20
+ElectronTail 18 10
+ElectronHead 17 10
+Wire 14 10 16 10
+ElectronHead 32 26
+ElectronTail 33 26
+ElectronHead 34 26
+ORGate 35 26
+ElectronHead 32 30
+ElectronTail 33 30
+ElectronHead 34 30
+Diode 39 28 0
+ElectronHead 45 28
+ElectronTail 46 28
+ElectronHead 43 28
+ElectronTail 44 28
+Wire 46 22 46 27
+ElectronTail 45 22
+ElectronHead 44 22
+ElectronTail 43 22
+Wire 35 22 42 22
+ElectronTail 34 22
+ElectronHead 33 22
+ElectronTail 32 22
+XORGate 19 28 270
+Wire 21 34 23 34
+ElectronHead 28 23
+ElectronTail 29 23
+Wire 29 30 31 30
+ElectronHead 29 29
+ElectronTail 29 28
+ElectronHead 29 27
+ElectronHead 25 21
+ElectronHead 20 21
+ElectronTail 20 22
+Wire 9 10 9 15
+ElectronHead 10 15
+ElectronTail 11 15
+ElectronHead 12 15
+Wire 13 15 16 15
+ElectronTail 17 15
+ElectronHead 18 15
