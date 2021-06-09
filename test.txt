@@ -1,0 +1,28 @@
+ElectronHead 10 2
+ElectronHead 16 3
+ElectronHead 22 6
+ElectronHead 10 8
+ElectronHead 4 8
+ElectronHead 6 4
+ElectronTail 9 2
+ElectronTail 15 3
+ElectronTail 21 6
+ElectronTail 9 8
+ElectronTail 3 8
+ElectronTail 7 4
+Wire 3 2 8 2
+Wire 2 3 3 3
+Wire 3 4 5 4
+Wire 8 4 10 4
+Wire 11 3 14 3
+Wire 2 9 2 9
+Wire 11 9 16 9
+Wire 3 10 10 10 
+Wire 5 8 8 8
+Wire 23 6 23 6
+Wire 17 4 17 4
+Wire 17 8 17 8
+Wire 16 5 19 5
+Wire 16 7 19 7
+Wire 16 6 16 6
+Wire 19 6 20 6
