@@ -52,4 +52,9 @@ public class ElectronHead implements Component{
         return "ElectronHead";
     }
 
+    @Override
+    public String getLine() {
+        return getName()+" "+x+" "+y;
+    }
+
 }

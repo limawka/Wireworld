@@ -12,10 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import static javax.swing.JOptionPane.showMessageDialog;
 
-import static gui.UserInterface.showBoard;
-import static gui.UserInterface.update;
+import static gui.UserInterface.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class WireworldWindow {
     private JPanel MainPanel;
@@ -31,6 +30,7 @@ public class WireworldWindow {
     private JLabel horizontalSpacer;
     private JButton nextButton;
     private File fileIn;
+    private File fileOut;
     private Boolean running = false;
     private Timer boardUpdater = null;
 
@@ -61,28 +61,11 @@ public class WireworldWindow {
             JFileChooser chooser = new JFileChooser();
             int decision = chooser.showOpenDialog(WireworldWindow.this.MainPanel);
             if (decision == JFileChooser.APPROVE_OPTION) {
-                File selected = chooser.getSelectedFile();
-                String filename = selected.getAbsolutePath();
+                fileOut = chooser.getSelectedFile();
+                String filename = fileOut.getAbsolutePath();
                 pathSaveToFile.setText(filename);
                 try {
-                    PrintWriter out = new PrintWriter(filename);
-                    board.Board b = BoardRenderer.getB();
-                    for(int i = 0; i < BoardRenderer.getX_size(); i++){
-                        for(int j = 0; j < BoardRenderer.getY_size(); j++){
-                            if(b.board[i][j] == board.Cell.CONDUCTOR){
-                                out.println("Wire " + i +" " + j + " " + (i+1) + " " + j);
-                            }
-                            else
-                            if(b.board[i][j] == board.Cell.EHEAD){
-                                out.println("ElectronHead " + i +" " + j);
-                            }
-                            else
-                            if(b.board[i][j] == board.Cell.ETAIL){
-                                out.println("ElectronTail " + i +" " + j);
-                            }
-                        }
-                    }
-                    out.close();
+                    saveBoard();
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
@@ -135,5 +118,7 @@ public class WireworldWindow {
     public File getFileIn() {
         return fileIn;
     }
+
+    public File getFileOut() { return fileOut;}
 
 }

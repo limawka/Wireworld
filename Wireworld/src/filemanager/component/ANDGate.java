@@ -12,6 +12,7 @@ public class ANDGate implements Component{
     private final int y;
     private final int xSize;
     private final int ySize;
+    private final int rotation;
     private final Cell[][] componentArray;
 
     public static final Cell[][] componentBasicArray = {
@@ -33,6 +34,7 @@ public class ANDGate implements Component{
     ANDGate(int x, int y, int rotation) throws ComponentRotationException {
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
         int inverse, transpose;
 
         if(rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) throw new ComponentRotationException();
@@ -94,5 +96,9 @@ public class ANDGate implements Component{
 
     public String getName(){
         return "ANDGate";
+    }
+
+    public String getLine() {
+        return getName()+" "+x+" "+y+" "+rotation;
     }
 }

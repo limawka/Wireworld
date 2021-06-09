@@ -13,6 +13,7 @@ public class ORGate implements Component{
     private final int xSize;
     private final int ySize;
     private final Cell[][] componentArray;
+    private final int rotation;
 
     public static final Cell[][] componentBasicArray = {
             {CONDUCTOR, EMPTY, EMPTY, EMPTY, CONDUCTOR},
@@ -25,6 +26,7 @@ public class ORGate implements Component{
     ORGate(int x, int y, int rotation) throws ComponentRotationException {
         this.x = x;
         this.y = y;
+        this.rotation = rotation;
         int inverse, transpose;
 
         if(rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) throw new ComponentRotationException();
@@ -86,5 +88,9 @@ public class ORGate implements Component{
 
     public String getName(){
         return "ORGate";
+    }
+
+    public String getLine() {
+        return getName()+" "+x+" "+y+" "+rotation;
     }
 }

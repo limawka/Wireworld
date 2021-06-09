@@ -12,6 +12,7 @@ class Diode implements Component {
     private final int xSize;
     private final int ySize;
     private final Cell[][] componentArray;
+    private final int rotation;
 
     public static final Cell[][] componentBasicArray = {
         {EMPTY, CONDUCTOR, EMPTY},
@@ -25,6 +26,7 @@ class Diode implements Component {
         this.x = x;
         this.y = y;
         int inverse, transpose;
+        this.rotation = rotation;
 
         if(rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) throw new ComponentRotationException();
 
@@ -85,5 +87,9 @@ class Diode implements Component {
 
     public String getName(){
         return "Diode";
+    }
+
+    public String getLine() {
+        return getName()+" "+x+" "+y+" "+rotation;
     }
 }

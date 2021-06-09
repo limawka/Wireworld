@@ -13,6 +13,7 @@ public class Clock implements Component{
     private final int xSize;
     private final int ySize;
     private final Cell[][] componentArray;
+    private final int rotation;
 
     public static final Cell[][] componentBasicArray = {
             {EMPTY, CONDUCTOR, EMPTY},
@@ -23,6 +24,7 @@ public class Clock implements Component{
 
 
     Clock(int x, int y, int rotation) throws ComponentRotationException {
+        this.rotation = rotation;
         this.x = x;
         this.y = y;
         int inverse, transpose;
@@ -85,6 +87,10 @@ public class Clock implements Component{
     }
 
     public String getName(){
-        return "ANDGate";
+        return "Clock";
+    }
+
+    public String getLine() {
+        return getName()+" "+x+" "+y+" "+rotation;
     }
 }

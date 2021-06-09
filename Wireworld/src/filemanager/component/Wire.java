@@ -14,12 +14,16 @@ public class Wire implements Component{
     private final int yStart;
     private final int xSize;
     private final int ySize;
+    private final int xEnd;
+    private final int yEnd;
     private final Cell[][] componentArray;
 
 
     Wire(int xStart, int yStart, int xEnd, int yEnd) {
         this.xStart =  xStart;
         this.yStart = yStart;
+        this.yEnd = yEnd;
+        this.xEnd = xEnd;
 
         this.xSize = xEnd - xStart + 1;
         this.ySize = yEnd - yStart + 1;
@@ -126,5 +130,9 @@ public class Wire implements Component{
 
     public String getName(){
         return "Wire";
+    }
+
+    public String getLine() {
+        return getName()+" "+xStart+" "+yStart+" "+xEnd+" "+yEnd;
     }
 }

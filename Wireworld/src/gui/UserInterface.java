@@ -33,19 +33,19 @@ public class UserInterface {
         frame.setPreferredSize(new Dimension(1520, 1000));
         frame.pack();
         frame.setVisible(true);
+        frame.setResizable(false);
         //showBoard();
     }
     public static void update() throws InterruptedException
     {
+        if(boardRenderer != null){
         boardRenderer.updateBoard();
         background.getRootPanel().repaint();
-        Thread.sleep(500);
+        }
     }
     public static void showBoard () throws FileNotFoundException, FileFormatException, ComponentPlacementException {
 
-            //todo czyscic plansze przed wczytaniem kolejnego pliku
-            //fm.loadBoard(new File("example_boards/test"));
-            fm.loadBoard(background.getFileIn());   // pliki z innego folderu niz folder z aplikacja sie u mnie nie wczytuja, todo przetestowac i ewentualnie naprawic
+            fm.loadBoard(background.getFileIn());
             board = fm.getBoard();
 
             boardRenderer = new BoardRenderer(fm.getxSize(), fm.getySize(), board);
@@ -53,5 +53,8 @@ public class UserInterface {
             frame.setVisible(true);
             boardRenderer.setVisible(true);
 
+    }
+    public static void saveBoard() throws FileNotFoundException {
+        fm.saveBoard(background.getFileOut());
     }
 }

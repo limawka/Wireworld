@@ -13,4 +13,6 @@ public interface Component {
     int getYSize();
 
     String getName();
+    // linia do zapisu do pliku
+    String getLine();
 }

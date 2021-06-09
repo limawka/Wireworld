@@ -9,8 +9,10 @@ import java.util.*;
 
 public class Board {
 
-    static List<Component> components = new ArrayList<>();
-    static List<Component> electrons = new ArrayList<>();
+
+
+     List<Component> components = new ArrayList<>();
+     List<Component> electrons = new ArrayList<>();
 
     public Cell[][] board;
 
@@ -80,7 +82,7 @@ public class Board {
         return counter == 1 || counter == 2;
     }
 
-    // for tests, todo delete later
+    // for tests
     public void printBoard() {
         System.out.println();
         for (int i = 0; i < board[0].length; i++) {
@@ -89,5 +91,13 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public List<Component> getElectrons() {
+        return electrons;
     }
 }

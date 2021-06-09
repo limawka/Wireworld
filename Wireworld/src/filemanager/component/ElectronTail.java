@@ -53,4 +53,8 @@ public class ElectronTail implements Component{
         return "ElectronTail";
     }
 
+    public String getLine() {
+        return getName()+" "+x+" "+y;
+    }
+
 }
