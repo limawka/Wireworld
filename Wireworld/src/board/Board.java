@@ -35,7 +35,7 @@ public class Board {
             throw new ComponentPlacementException(component.getX(), component.getY(), component.getName());
         }
 
-        if (Set.of("ElectronHead", "ElectronTail").contains(component.getName()))
+        if (component.getName().equals("ElectronHead") || component.getName().equals("ElectronTail"))
             electrons.add(component);
         else
             components.add(component);
