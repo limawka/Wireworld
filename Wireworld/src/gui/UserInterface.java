@@ -22,7 +22,7 @@ public class UserInterface {
 
     public static void main(String[] args) {
 
-        fm = new FileManager(150, 100);
+
 
         background = new WireworldWindow();
 
@@ -44,7 +44,7 @@ public class UserInterface {
         }
     }
     public static void showBoard () throws FileNotFoundException, FileFormatException, ComponentPlacementException {
-
+            fm = new FileManager(150, 100);
             fm.loadBoard(background.getFileIn());
             board = fm.getBoard();
 
